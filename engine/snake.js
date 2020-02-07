@@ -54,7 +54,7 @@ function Snake(screenProperties) {
 
   this.collided = function() {
     var head = this.elements[0];
-    if (head.x <= 0 || head.y <= 0 || head.x >= screenProperties.width - head.wx || head.y >= screenProperties.height - head.wy) {
+    if (head.x <= 0 || head.y <= 0 || head.x > screenProperties.width || head.y > screenProperties.height) {
       return true;
     }
     return false;
