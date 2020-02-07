@@ -1,4 +1,6 @@
 function IntroScreen(screenProperties) {
+  noLoop();
+
   this.screenProperties = screenProperties
   introMusic.play();
   introMusic.loop();
