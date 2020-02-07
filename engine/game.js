@@ -1,12 +1,19 @@
 function Game(screenProperties) {
-  this.snake = new Snake(screenProperties)
-  this.introScreen = new IntroScreen(screenProperties)
-  this.playgroundScreen = new PlaygroundScreen(screenProperties)
+  this.introScreen = new IntroScreen(screenProperties, this)
+  this.playgroundScreen = new PlaygroundScreen(screenProperties, this)
 
   this.currentScreen = this.introScreen;
 
   this.run = function() {
     this.currentScreen.draw()
+  }
+
+  this.changeScreen = function(name) {
+    if (name === 'PlaygroundScreen') {
+      this.currentScreen = this.playgroundScreen;
+    } else {
+      this.introScreen = this.introScreen;
+    }
   }
 
   this.keyPressed = function(keyCode) {

@@ -38,9 +38,6 @@ function Snake(screenProperties) {
   }
 
   this.changeDirection = function(x, y) {
-    if (this.directionX * -1 == x && this.directionY * -1 == y) {
-      return
-    }
     this.directionX = x;
     this.directionY = y;
   }
@@ -56,6 +53,7 @@ function Snake(screenProperties) {
   this.stop = function() {
     this.directionX = 0;
     this.directionY = 0;
+    stopLoop();
   }
 
   this.draw = function() {
