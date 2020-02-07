@@ -12,9 +12,11 @@ function PlaygroundScreen(screenProperties, gameInstance) {
   }.bind(this)
 
   this._spawnFood = function() {
-    var x = int((Math.random() * screenProperties.width / 10))*10;
-    var y = int((Math.random() * screenProperties.height / 10))*10;
-    this.food = new Food(x, y);
+    var width = int(screenProperties.width/50);
+    var height = int(screenProperties.height/50);
+    var x = int(Math.random() * screenProperties.width / width) * width;
+    var y = int(Math.random() * screenProperties.height / height) * height;
+    this.food = new Food(x, y, width, height);
   }.bind(this)
 
   this.keyPressed = function(keyCode) {

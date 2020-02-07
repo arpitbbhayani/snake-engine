@@ -5,6 +5,7 @@ function Game(screenProperties) {
   this.currentScreen = this.introScreen;
 
   this.run = function() {
+    frameRate(10)
     this.currentScreen.draw()
   }
 
