@@ -1,36 +1,17 @@
-function Game(screen) {
-  this.snake = new Snake(screen)
-  introMusic.play()
+function Game(screenProperties) {
+  this.snake = new Snake(screenProperties)
+  this.introScreen = new IntroScreen(screenProperties)
+  this.playgroundScreen = new PlaygroundScreen(screenProperties)
+
+  this.currentScreen = this.introScreen;
 
   this.run = function() {
-    this.draw()
+    this.currentScreen.draw()
+  }
 
-    if (this.snake.collided()) {
-      this.snake.stop()
-      noLoop()
-      return
+  this.keyPressed = function(keyCode) {
+    if (this.currentScreen.keyPressed) {
+      this.currentScreen.keyPressed(keyCode)
     }
-
-    this.snake.move()
-  }
-
-  this.draw = function() {
-    this.snake.draw()
-  }
-
-  this.onUp = function() {
-    this.snake.changeDirection(0, -1)
-  }
-
-  this.onDown = function() {
-    this.snake.changeDirection(0, 1)
-  }
-
-  this.onLeft = function() {
-    this.snake.changeDirection(-1, 0)
-  }
-
-  this.onRight = function() {
-    this.snake.changeDirection(1, 0)
   }
 }

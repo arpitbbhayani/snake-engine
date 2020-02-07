@@ -18,8 +18,8 @@ function SnakeTail(x, y) {
   }
 }
 
-function Snake(screen) {
-  this.screen = screen
+function Snake(screenProperties) {
+  this.screenProperties = screenProperties
   this.directionX = 1;
   this.directionY = 0;
 
@@ -47,7 +47,7 @@ function Snake(screen) {
 
   this.collided = function() {
     var head = this.elements[0];
-    if (head.x <= 0 || head.y <= 0 || head.x >= this.screen.width - 10 || head.y >= this.screen.height - 10) {
+    if (head.x <= 0 || head.y <= 0 || head.x >= this.screenProperties.width - 10 || head.y >= this.screenProperties.height - 10) {
       return true;
     }
     return false;

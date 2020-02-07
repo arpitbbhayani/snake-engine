@@ -1,17 +1,17 @@
 var game = null;
 var gameCanvas = null;
 
-var screen = {
+var screenProperties = {
   width: 640,
   height: 480,
 }
 
 function setup() {
-  screen.width = windowWidth;
-  screen.height = windowHeight;
-  gameCanvas = createCanvas(screen.width, screen.height);
+  screenProperties.width = windowWidth;
+  screenProperties.height = windowHeight;
+  gameCanvas = createCanvas(screenProperties.width, screenProperties.height);
   gameCanvas.parent('sketch');
-  game = new Game(screen);
+  game = new Game(screenProperties);
 }
 
 function windowResized() {
@@ -19,6 +19,5 @@ function windowResized() {
 }
 
 function draw() {
-  background(0, 0, 0)
   game.run()
 }
