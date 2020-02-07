@@ -12,8 +12,8 @@ function PlaygroundScreen(screenProperties, gameInstance) {
   }.bind(this)
 
   this._spawnFood = function() {
-    var x = int((Math.random() * screenProperties.width * 10)/10);
-    var y = int((Math.random() * screenProperties.height * 10)/10);
+    var x = int((Math.random() * screenProperties.width / 10))*10;
+    var y = int((Math.random() * screenProperties.height / 10))*10;
     this.food = new Food(x, y);
   }.bind(this)
 
@@ -63,6 +63,12 @@ function PlaygroundScreen(screenProperties, gameInstance) {
       this._drawPlayButton();
       noLoop();
     }
+
+    if (this.snake.eat(this.food)) {
+      this._spawnFood()
+    }
+
+    this.food.draw();
   }.bind(this)
 
   this._startGame();

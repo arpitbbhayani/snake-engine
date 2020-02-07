@@ -50,6 +50,14 @@ function Snake(screenProperties) {
     return false;
   }
 
+  this.eat = function(food) {
+    var head = this.elements[0];
+    if (head.x === food.x && head.y === food.y) {
+      return true;
+    }
+    return false;
+  }
+
   this.stop = function() {
     this.directionX = 0;
     this.directionY = 0;
