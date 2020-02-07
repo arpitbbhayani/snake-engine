@@ -1,16 +1,20 @@
 function PlaygroundScreen(screenProperties, gameInstance) {
-  this.btn = null;
-  this.isGameOn = true;
-  this.snake = new Snake(screenProperties)
+  this.isGameOn = false;
+  this.snake = null;
+  this.food = null
 
   this._startGame = function() {
-    if (this.btn) {
-      this.btn.remove();
-    }
     rect(0, 0, canvas.width, canvas.height);
     this.snake = new Snake(screenProperties)
+    this._spawnFood();
     this.isGameOn = true;
     loop();
+  }.bind(this)
+
+  this._spawnFood = function() {
+    var x = int((Math.random() * screenProperties.width * 10)/10);
+    var y = int((Math.random() * screenProperties.height * 10)/10);
+    this.food = new Food(x, y);
   }.bind(this)
 
   this.keyPressed = function(keyCode) {
@@ -43,11 +47,8 @@ function PlaygroundScreen(screenProperties, gameInstance) {
     var height = (playImage.height / playImage.width) * width;
     var x = screenProperties.width/2 - width/2;
     var y = max(screenProperties.height/2, 0);
-    this.btn = createImg('/engine/img/play.png');
 
-    this.btn.position(x, y);
-    this.btn.size(width, height);
-    this.btn.mousePressed(this._startGame)
+    image(playImage, x, y, width, height);
   }.bind(this)
 
   this.draw = function() {
@@ -63,4 +64,6 @@ function PlaygroundScreen(screenProperties, gameInstance) {
       noLoop();
     }
   }.bind(this)
+
+  this._startGame();
 }
