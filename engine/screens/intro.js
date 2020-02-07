@@ -1,5 +1,7 @@
 function IntroScreen(screenProperties) {
   this.screenProperties = screenProperties
+  introMusic.play();
+  introMusic.loop();
 
   this._drawNameImage = function() {
     var width = min(screenProperties.width/2, 600);
@@ -10,6 +12,16 @@ function IntroScreen(screenProperties) {
   }
 
   this._drawPlayButton = function() {
+    var width = min(screenProperties.width/2, 200);
+    var height = (playImage.height / playImage.width) * width;
+    var x = screenProperties.width/2 - width/2;
+    var y = max(screenProperties.height/2, 0);
+    var button = createImg('/engine/img/play.png');
+    button.position(x, y);
+    button.size(width, height);
+    button.mousePressed(function() {
+      introMusic.stop();
+    })
   }
 
   this.draw = function() {
