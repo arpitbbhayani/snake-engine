@@ -53,7 +53,6 @@ function Snake(screenProperties) {
   this.stop = function() {
     this.directionX = 0;
     this.directionY = 0;
-    stopLoop();
   }
 
   this.draw = function() {

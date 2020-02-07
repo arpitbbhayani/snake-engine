@@ -1,8 +1,6 @@
 function IntroScreen(screenProperties, gameInstance) {
   noLoop();
 
-  this.screenProperties = screenProperties
-  this.gameInstance = gameInstance;
   this.btn = null;
 
   introMusic.play();
@@ -13,7 +11,7 @@ function IntroScreen(screenProperties, gameInstance) {
     gameInstance.changeScreen('PlaygroundScreen');
     this.btn.remove();
     loop();
-  }
+  }.bind(this)
 
   this._drawNameImage = function() {
     var width = min(600, screenProperties.width/2);
@@ -24,7 +22,7 @@ function IntroScreen(screenProperties, gameInstance) {
     image(nameImage, x, y, width, height);
   }
 
-  this._drawPlayButton = function(gameInstance) {
+  this._drawPlayButton = function() {
     var width = min(200, screenProperties.width/2);
     var height = (playImage.height / playImage.width) * width;
     var x = screenProperties.width/2 - width/2;
@@ -45,6 +43,6 @@ function IntroScreen(screenProperties, gameInstance) {
   this.draw = function() {
     background(0, 0, 0);
     this._drawNameImage();
-    this._drawPlayButton(this.gameInstance);
+    this._drawPlayButton(gameInstance);
   }
 }
