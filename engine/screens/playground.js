@@ -2,21 +2,22 @@ function PlaygroundScreen(screenProperties, gameInstance) {
   this.isGameOn = false;
   this.snake = null;
   this.food = null
+  this.rows = 50;
+  this.cols = 50;
+  this.wx = int(screenProperties.width/this.rows)
+  this.wy = int(screenProperties.height/this.cols)
 
   this._startGame = function() {
-    rect(0, 0, canvas.width, canvas.height);
-    this.snake = new Snake(screenProperties)
+    this.snake = new Snake(this.rows, this.cols, this.wx, this.wy)
     this._spawnFood();
     this.isGameOn = true;
     loop();
   }.bind(this)
 
   this._spawnFood = function() {
-    var width = int(screenProperties.width/50);
-    var height = int(screenProperties.height/50);
-    var x = int(Math.random() * screenProperties.width / width) * width;
-    var y = int(Math.random() * screenProperties.height / height) * height;
-    this.food = new Food(x, y, width, height);
+    var x = int(Math.random() * this.rows);
+    var y = int(Math.random() * this.cols);
+    this.food = new Food(x, y, this.wx, this.wy);
   }.bind(this)
 
   this.keyPressed = function(keyCode) {

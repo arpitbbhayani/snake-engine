@@ -1,37 +1,29 @@
 function SnakeHead(x, y, wx, wy) {
   this.x = x
   this.y = y
-  this.wx = wx
-  this.wy = wy
 
   this.draw = function() {
     fill(255, 255, 255);
-    rect(this.x, this.y, wx, wy);
+    rect(this.x * wx, this.y * wy, wx, wy);
   }
 }
 
 function SnakeTail(x, y, wx, wy) {
   this.x = x
   this.y = y
-  this.wx = wx
-  this.wy = wy
 
   this.draw = function() {
     fill(255, 255, 255);
-    rect(this.x, this.y, wx, wy);
+    rect(this.x * wx, this.y * wy, wx, wy);
   }
 }
 
-function Snake(screenProperties) {
-  screenProperties = screenProperties
+function Snake(rows, cols, wx, wy) {
   this.directionX = 1;
   this.directionY = 0;
 
-  var width = int(screenProperties.width/50);
-  var height = int(screenProperties.height/50)
-
-  var head = new SnakeHead(width * 25, height * 25, width, height); // center
-  var tail = new SnakeTail(width * 24, height * 25, width, height); // one behind
+  var head = new SnakeHead(10, 10, wx, wy); // center
+  var tail = new SnakeTail(9, 10, wx, wy); // one behind
 
   this.elements = [
     head,
@@ -43,18 +35,18 @@ function Snake(screenProperties) {
       this.elements[i].x = this.elements[i-1].x;
       this.elements[i].y = this.elements[i-1].y;
     }
-    this.elements[0].x += this.directionX * this.elements[0].wx;
-    this.elements[0].y += this.directionY * this.elements[0].wy;
+    this.elements[0].x += this.directionX;
+    this.elements[0].y += this.directionY;
   }
 
-  this.changeDirection = function(x, y) {
-    this.directionX = x;
-    this.directionY = y;
+  this.changeDirection = function(dirX, dirY) {
+    this.directionX = dirX;
+    this.directionY = dirY;
   }
 
   this.collided = function() {
     var head = this.elements[0];
-    if (head.x <= 0 || head.y <= 0 || head.x > screenProperties.width || head.y > screenProperties.height) {
+    if (head.x < 0 || head.y < 0 || head.x >= rows || head.y >= cols) {
       return true;
     }
     return false;
