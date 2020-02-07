@@ -7,6 +7,8 @@ function PlaygroundScreen(screenProperties, gameInstance) {
   this.wx = int(screenProperties.width/this.rows)
   this.wy = int(screenProperties.height/this.cols)
 
+  gameCanvas.resize(this.rows * this.wx, this.cols * this.wy)
+
   this._startGame = function() {
     this.snake = new Snake(this.rows, this.cols, this.wx, this.wy)
     this._spawnFood();
