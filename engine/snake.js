@@ -60,6 +60,10 @@ function Snake(rows, cols, wx, wy) {
     return false;
   }.bind(this)
 
+  this.isSnakeCell = function(x, y) {
+    return this.elements.find(e => e.x === x && e.y === y);
+  }.bind(this)
+
   this.stop = function() {
     this.directionX = 0;
     this.directionY = 0;

@@ -18,8 +18,11 @@ function PlaygroundScreen(screenProperties, gameInstance) {
   }.bind(this)
 
   this._spawnFood = function() {
-    var x = int(Math.random() * this.rows);
-    var y = int(Math.random() * this.cols);
+    var x = 0, y = 0;
+    do {
+      x = int(Math.random() * this.rows);
+      y = int(Math.random() * this.cols);
+    } while(this.snake.isSnakeCell(x, y));
     this.food = new Food(x, y, this.wx, this.wy);
   }.bind(this)
 
