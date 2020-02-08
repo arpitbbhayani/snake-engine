@@ -4,8 +4,8 @@ var playImage = null;
 var gameOverImage = null;
 
 function preload() {
-  introMusic = loadSound('/engine/sounds/intro.mp3');
-  nameImage = loadImage('/engine/img/name.png');
-  playImage = loadImage('/engine/img/play.png');
-  gameOverImage = loadImage('/engine/img/game-over.png');
+  introMusic = loadSound('/sounds/intro.mp3');
+  nameImage = loadImage('/img/name.png');
+  playImage = loadImage('/img/play.png');
+  gameOverImage = loadImage('/img/game-over.png');
 }
