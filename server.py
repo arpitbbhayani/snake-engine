@@ -29,7 +29,7 @@ async def api(request):
 
 
 app.router.add_get('/api', api)
-app.router.add_static('/', 'engine')
+app.router.add_static('/', 'game')
 
 
 if __name__ == '__main__':
