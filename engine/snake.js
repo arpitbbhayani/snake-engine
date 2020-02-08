@@ -46,7 +46,7 @@ function Snake(rows, cols, wx, wy) {
     if (head.x < 0 || head.y < 0 || head.x >= rows || head.y >= cols) {
       return true;
     }
-    return false;
+    return this.elements.slice(1).find(x => x.x === head.x && x.y === head.y)
   }
 
   this.eat = function(food) {
