@@ -1,3 +1,13 @@
+function SnakeBody(x, y, wx, wy) {
+  this.x = x
+  this.y = y
+
+  this.draw = function() {
+    fill(255, 255, 255);
+    rect(this.x * wx, this.y * wy, wx, wy);
+  }
+}
+
 function SnakeHead(x, y, wx, wy) {
   this.x = x
   this.y = y
@@ -64,7 +74,7 @@ function Snake(rows, cols, wx, wy) {
       return true;
     }
     return false;
-  }
+  }.bind(this)
 
   this.stop = function() {
     this.directionX = 0;
