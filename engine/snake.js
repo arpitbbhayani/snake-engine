@@ -40,6 +40,12 @@ function Snake(rows, cols, wx, wy) {
   }
 
   this.changeDirection = function(dirX, dirY) {
+    if (dirX && dirX === this.directionX * -1) {
+      return
+    }
+    if (dirY && dirY === this.directionY * -1) {
+      return
+    }
     this.directionX = dirX;
     this.directionY = dirY;
   }
