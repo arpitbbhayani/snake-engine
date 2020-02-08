@@ -66,8 +66,8 @@ function PlaygroundScreen(screenProperties, gameInstance) {
 
   this.draw = function() {
     background(0, 0, 0);
-    this.snake.draw();
     this.snake.move();
+    this.snake.draw();
     this._drawScore();
 
     if (this.snake.collided()) {

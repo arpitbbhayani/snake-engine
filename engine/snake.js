@@ -8,32 +8,12 @@ function SnakeBody(x, y, wx, wy) {
   }
 }
 
-function SnakeHead(x, y, wx, wy) {
-  this.x = x
-  this.y = y
-
-  this.draw = function() {
-    fill(255, 255, 255);
-    rect(this.x * wx, this.y * wy, wx, wy);
-  }
-}
-
-function SnakeTail(x, y, wx, wy) {
-  this.x = x
-  this.y = y
-
-  this.draw = function() {
-    fill(255, 255, 255);
-    rect(this.x * wx, this.y * wy, wx, wy);
-  }
-}
-
 function Snake(rows, cols, wx, wy) {
   this.directionX = 1;
   this.directionY = 0;
 
-  var head = new SnakeHead(10, 10, wx, wy); // center
-  var tail = new SnakeTail(9, 10, wx, wy); // one behind
+  var head = new SnakeBody(10, 10, wx, wy); // center
+  var tail = new SnakeBody(9, 10, wx, wy); // one behind
 
   this.elements = [
     head,
@@ -41,13 +21,14 @@ function Snake(rows, cols, wx, wy) {
   ]
 
   this.move = function() {
-    for (var i = 1; i < this.elements.length; i+=1) {
-      this.elements[i].x = this.elements[i-1].x;
-      this.elements[i].y = this.elements[i-1].y;
-    }
-    this.elements[0].x += this.directionX;
-    this.elements[0].y += this.directionY;
-  }
+    var head = this.elements[0];
+    var tail = this.elements[this.elements.length - 1]
+
+    tail.x = head.x + this.directionX;
+    tail.y = head.y + this.directionY;
+
+    this.elements.unshift(this.elements.pop())
+  }.bind(this)
 
   this.changeDirection = function(dirX, dirY) {
     if (dirX && dirX === this.directionX * -1) {
@@ -71,6 +52,9 @@ function Snake(rows, cols, wx, wy) {
   this.eat = function(food) {
     var head = this.elements[0];
     if (head.x === food.x && head.y === food.y) {
+      this.elements.splice(1, 0, new SnakeBody(head.x, head.y, wx, wy));
+      head.x += this.directionX;
+      head.y += this.directionY;
       return true;
     }
     return false;
@@ -82,6 +66,6 @@ function Snake(rows, cols, wx, wy) {
   }
 
   this.draw = function() {
-    this.elements.map(e => e.draw())
+    this.elements.forEach(x => x.draw())
   }
 }
