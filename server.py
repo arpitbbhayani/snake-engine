@@ -23,7 +23,14 @@ def disconnect(sid):
     print('disconnect ', sid)
 
 
+async def api(request):
+    text = "Hello, World!"
+    return web.Response(text=text)
+
+
+app.router.add_get('/api', api)
 app.router.add_static('/', 'engine')
+
 
 if __name__ == '__main__':
     web.run_app(app, host="0.0.0.0", port="4003")
