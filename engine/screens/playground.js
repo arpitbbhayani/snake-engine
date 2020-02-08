@@ -6,6 +6,7 @@ function PlaygroundScreen(screenProperties, gameInstance) {
   this.cols = 50;
   this.wx = int(screenProperties.width/this.rows)
   this.wy = int(screenProperties.height/this.cols)
+  this.score = 0;
 
   gameCanvas.resize(this.rows * this.wx, this.cols * this.wy)
 
@@ -56,10 +57,18 @@ function PlaygroundScreen(screenProperties, gameInstance) {
     image(playImage, x, y, width, height);
   }.bind(this)
 
+  this._drawScore = function() {
+    textSize(32);
+    textFont('monospace');
+    text('Score: ' + this.score, 10, 30);
+    fill(255, 255, 255);
+  }.bind(this)
+
   this.draw = function() {
     background(0, 0, 0);
     this.snake.draw();
     this.snake.move();
+    this._drawScore();
 
     if (this.snake.collided()) {
       this.isGameOn = false;
@@ -71,6 +80,7 @@ function PlaygroundScreen(screenProperties, gameInstance) {
 
     if (this.snake.eat(this.food)) {
       this._spawnFood()
+      this.score+=1;
     }
 
     this.food.draw();
